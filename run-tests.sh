@@ -10,6 +10,13 @@ cd ..
 if [ ! -f ./README.txt ]; then
     touch README.txt
 fi
-echo 'Test Execution Result'>> README.txt
- sed -n '859p' test-execution.txt >> README.txt
- sed -n '874p' test-execution.txt >> README.txt
+
+__header="
+Contributors: Young Lee, Kylar Osborne
+Github (forked): https://github.com/youngtothelee/moshi.git
+"
+
+echo "$__header" >> README.txt
+echo 'Test Execution Result:'>>README.txt
+ sed -n '859p' test-execution.txt >>README.txt
+ sed -n '874p' test-execution.txt >>README.txt

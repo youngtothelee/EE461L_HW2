@@ -28,9 +28,10 @@ q
 END
 fi
 time mvn test >>test-coverage.txt
-echo 'Test Coverage Result' >> ../../README.txt
+echo 'Test Coverage Result:' >> ../../README.txt
  sed -n '85p' test-coverage.txt >> ../../README.txt
  sed -n '94p' test-coverage.txt >> ../../README.txt
+
 cd ./target/site/jacoco/
 cp index.html ../../../../../test-coverage.html
 cp -rf ./jacoco-resources ../../../../../jacoco-resources
