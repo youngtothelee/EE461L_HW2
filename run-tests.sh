@@ -1,10 +1,10 @@
 #Detect Operating System
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
      if hash maven 2>/dev/null; then
-         echo 'maven already exists. Skipping installation'
+         echo 'Maven already installed. Skipping installation'
      else
          # Install Maven
-         echo 'maven does not exist. Installing maven...'
+         echo 'Maven does not exist. Installing Maven...'
          sudo apt install maven
      fi
  elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -14,15 +14,16 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
          echo 'Homebrew does not exist. Installing Homebrew...'
          /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
      else
-         echo 'Updating Homebrew'
+         echo 'Updating Homebrew...'
          brew update
      fi
      which -s mvn
      if [[ $? != 0 ]]; then
+         echo 'Maven does not exist. Installing Maven...'
          # Install Maven
          brew install maven
      else
-         echo 'Maven already installed'
+         echo 'Maven already installed. Skipping installation...'
      fi
  else
      echo 'This OS is not UNIX'
@@ -47,6 +48,9 @@ Github (forked): https://github.com/youngtothelee/moshi.git
 "
 
 echo "$__header" >> README.txt
+echo '==========================================================='>> README.txt
 echo 'Test Execution Result:'>>README.txt
- sed -n '859p' test-execution.txt >>README.txt
- sed -n '874p' test-execution.txt >>README.txt
+echo '==========================================================='>> README.txt
+ awk '/Tests run:/' test-execution.txt >>README.txt
+ awk '/Total time/' test-execution.txt >>README.txt
+ echo -e "\n\n" >>README.txt

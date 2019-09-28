@@ -28,12 +28,19 @@ q
 END
 fi
 time mvn test >>test-coverage.txt
+echo '==========================================================='>> ../../README.txt
 echo 'Test Coverage Result:' >> ../../README.txt
- sed -n '85p' test-coverage.txt >> ../../README.txt
- sed -n '94p' test-coverage.txt >> ../../README.txt
+echo '==========================================================='>> ../../README.txt
+ awk '/Tests run:/' test-coverage.txt >>../../README.txt
+ awk '/Total time/' test-coverage.txt >>../../README.txt
 
 cd ./target/site/jacoco/
 cp index.html ../../../../../test-coverage.html
 cp -rf ./jacoco-resources ../../../../../jacoco-resources
 cd ../../../../../
-open test-coverage.html
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    xdg-open test-coverage.html
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    open test-coverage.html
+fi
+
